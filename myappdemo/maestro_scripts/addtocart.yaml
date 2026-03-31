@@ -1,0 +1,82 @@
+appId: com.saucelabs.mydemoapp.android
+---
+- launchApp:
+    clearState: true
+
+ #Verify that user can add products to cart from catalog
+
+- tapOn: 
+   text: product image
+   index: 0
+- tapOn: Increase item quantity
+
+- tapOn: Add to cart
+- tapOn: Displays number of items in your cart
+- tapOn: Proceed To Checkout
+- tapOn: bod@example.com
+- tapOn:
+    text: Login
+    index: 1
+
+#Verify user can proceed for checkout after adding product to cart
+- tapOn: Rebecca Winter
+- inputText: Test
+- tapOn: Mandorley 112
+- inputText: Test1
+- tapOn: Entrance 1
+- inputText: Test1
+- hideKeyboard
+- tapOn: Truro
+- inputText: test
+- tapOn: Cornwall
+- inputText: test
+- hideKeyboard
+- tapOn: "89750"
+- inputText: "1234"
+- tapOn: United Kingdom
+- inputText: Australia
+- hideKeyboard
+- tapOn: To Payment
+
+#Final checkout process- tapOn: Rebecca Winter
+- tapOn: Rebecca Winter
+- inputText: Test
+- tapOn: 3258 1256 7568 7891
+- inputText: "123456789"
+- tapOn: 03/25
+- inputText: 04/25
+- tapOn: "123"
+- inputText: "123"
+- hideKeyboard
+- tapOn: Review Order
+- tapOn: Place Order
+- assertVisible: Checkout Complete
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
