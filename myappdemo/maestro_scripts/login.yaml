@@ -1,132 +1,125 @@
-appId:  com.saucelabs.mydemoapp.android
+# appId:  com.saucelabs.mydemoapp.android
+# ---
+# - launchApp:
+#     clearState: true
+
+#  #Verify login with valid username bod@example.com and password 10203040
+# - extendedWaitUntil:
+#     visible: View menu
+#     timeout: 10000
+
+# - tapOn: View menu
+# - tapOn: Log In
+# - tapOn:
+#     id: nameRL
+# - inputText: bod@example.com
+# - tapOn:
+#     id: passwordET
+# - inputText: 10203040"
+# - hideKeyboard
+
+# - tapOn:
+#     text: Login
+#     index: 1
+
+# - tapOn: Cancel
+# - tapOn: View menu
+# - assertVisible: Log Out
+
+# #Verify login valid username user@example.com and password 10203040
+# - tapOn: Log Out
+# - tapOn: LOGOUT
+# - tapOn: visual@example.com
+# - tapOn:
+#     text: Login
+#     index: 1
+# - tapOn: View menu
+# - assertVisible: Log Out
+
+# #Verify login with credentials that has been locked out.
+# - tapOn: Log Out
+# - tapOn: LOGOUT
+# - tapOn:
+#     id: nameRL
+# - inputText: alice@example.com (locked out)
+# - tapOn:
+#     id: passwordET
+# - inputText: "10203040"
+# - hideKeyboard
+
+# - tapOn:
+#     text: Login
+# - assertVisible: Sorry this user has been locked out.
+
+# #Verify user cannot login with empty username
+# - longPressOn:
+#     id: nameET
+# - tapOn: Select all
+# - eraseText: 100
+
+# - tapOn:
+#     id: passwordET
+# - eraseText
+# - inputText: "10203040"
+# - hideKeyboard
+# - tapOn:
+#     text: Login
+#     index: 1
+# - assertVisible: Username is required
+
+# #verify user cannot login with empty password
+
+# - tapOn:
+#     id: nameRL
+# - inputText: hello
+# - tapOn:
+#     id: passwordET
+# - longPressOn:
+#     id: passwordET
+# - tapOn: Undo
+# - hideKeyboard
+
+# - tapOn:
+#     text: Login
+#     index: 1
+# - tapOn: Enter Password
+
+# #Verify user cannot login with wrong username(but allowing for entry)
+# - tapOn:
+#     id: passwordET
+# - inputText: :"10203040"
+# - hideKeyboard
+# - tapOn:
+#     text: Login
+#     index: 1
+
+# - tapOn: Cancel
+# - assertVisible: App logo and name
+
+appId: com.saucelabs.mydemoapp.android
 ---
 - launchApp:
     clearState: true
 
- #Verify login with valid username bod@example.com and password 10203040 
-- extendedWaitUntil:
-    visible: View menu
-    timeout: 10000
+# Wait for app to fully render
+- waitForAnimationToEnd
 
- 
-- tapOn: View menu
-- tapOn: Log In
+# Open menu
+- tapOn:
+    text: "View menu"
+
+- tapOn: "Log In"
+
+# ---- LOGIN 1 ----
 - tapOn:
     id: nameRL
 - inputText: bod@example.com
-- tapOn:
-    id: passwordET
-- inputText: 10203040"
-- hideKeyboard
 
-- tapOn:
-    text: Login
-    index: 1
-
-- tapOn: Cancel
-- tapOn: View menu
-- assertVisible: Log Out
-
-#Verify login valid username user@example.com and password 10203040
-- tapOn: Log Out
-- tapOn: LOGOUT
-- tapOn: visual@example.com
-- tapOn:
-    text: Login
-    index: 1
-- tapOn: View menu
-- assertVisible: Log Out
-
-
-#Verify login with credentials that has been locked out.
-- tapOn: Log Out
-- tapOn: LOGOUT
-- tapOn:
-    id: nameRL
-- inputText: alice@example.com (locked out)
 - tapOn:
     id: passwordET
 - inputText: "10203040"
+
 - hideKeyboard
 
 - tapOn:
-    text: Login
-- assertVisible: Sorry this user has been locked out.
-
-#Verify user cannot login with empty username
-- longPressOn:
-    id: nameET
-- tapOn: Select all
-- eraseText: 100
-
-- tapOn:
-    id: passwordET
-- eraseText
-- inputText: "10203040"
-- hideKeyboard
-- tapOn:
-    text: Login
-    index: 1
-- assertVisible: Username is required
-
-#verify user cannot login with empty password
-
-- tapOn:
-    id: nameRL
-- inputText: hello
-- tapOn:
-    id: passwordET
-- longPressOn:
-    id: passwordET
-- tapOn: Undo
-- hideKeyboard
-
-- tapOn:
-    text: Login
-    index: 1
-- tapOn: Enter Password
-
-
-#Verify user cannot login with wrong username(but allowing for entry)
-- tapOn:
-    id: passwordET
-- inputText: :"10203040"
-- hideKeyboard
-- tapOn:
-    text: Login
-    index: 1
- 
-- tapOn: Cancel
-- assertVisible: App logo and name
-
-   
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
+    text: "Login"
