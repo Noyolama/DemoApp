@@ -10,8 +10,6 @@ appId: com.saucelabs.mydemoapp.android
 - tapOn:
     id: productIV
 - tapOn:
-    id: plusIV
-- tapOn:
     id: cartBt
 - tapOn:
     id: cartIV

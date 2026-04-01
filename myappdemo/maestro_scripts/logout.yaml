@@ -1,0 +1,35 @@
+appId: com.saucelabs.mydemoapp.android
+---
+- launchApp:
+    clearState: true
+
+#Verify that user can logout after successful login
+- tapOn:
+    id: menuIV
+- tapOn:
+    id: itemTV
+    index: 10
+
+ #Login first
+- waitForAnimationToEnd
+- tapOn:
+    id: username3TV
+- tapOn:
+    id: buttonLL
+#Click on logout tab    
+- tapOn:
+    id: menuIV
+- tapOn:
+    id: itemTV
+    index: 10
+- tapOn:
+    id: button1
+- waitForAnimationToEnd
+- assertVisible:
+    id: loginTV
+
+
+
+
+
+   
