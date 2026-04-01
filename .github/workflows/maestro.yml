@@ -41,11 +41,9 @@ jobs:
           export PATH="$HOME/.maestro/bin:$PATH"
           maestro doctor
 
-
-    - name: Install APK
-      run: adb install app/mydemoapp.apk
-
-
+      - name: Install APK
+        run: |
+          adb install app/mydemoapp.apk
 
       - name: Run Maestro Tests
         run: |
