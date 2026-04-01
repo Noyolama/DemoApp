@@ -34,4 +34,4 @@ jobs:
           script: |
             adb devices
             adb install app/mydemoapp.apk
-            maestro test maestro-scripts/
+            maestro test myappdemo/maestro_scripts
