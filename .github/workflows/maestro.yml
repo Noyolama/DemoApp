@@ -9,6 +9,8 @@ on:
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout repository
@@ -22,17 +24,25 @@ jobs:
 
       - name: Install Android SDK
         uses: android-actions/setup-android@v2
-        with:
-          api-level: 33
-          target: default
-          arch: x86_64
-          build-tools: 33.0.0
 
-      - name: Start Android Emulator
+      - name: Install SDK Packages
+        run: |
+          yes | sdkmanager "platforms;android-33" "system-images;android-33;google_apis;x86_64" "build-tools;33.0.0"
+
+      - name: Create and Start Emulator
         run: |
           echo "no" | avdmanager create avd -n test_avd -k "system-images;android-33;google_apis;x86_64" --force
-          emulator -avd test_avd -no-window -no-audio &
+          nohup emulator -avd test_avd -no-window -no-audio &
+
+      - name: Wait for Emulator to Boot
+        run: |
           adb wait-for-device
+          boot_completed=""
+          until [[ "$boot_completed" =~ "1" ]]; do
+            boot_completed=$(adb shell getprop sys.boot_completed 2>/dev/null)
+            echo "Waiting for emulator to boot..."
+            sleep 5
+          done
           adb shell input keyevent 82
 
       - name: Install Maestro CLI
