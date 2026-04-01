@@ -2,12 +2,13 @@ appId: com.saucelabs.mydemoapp.android
 ---
 - launchApp:
     clearState: true
-- extendedWaitUntil:
-    visible: View menu
-    timeout: 10000    
-- tapOn: View menu
-- tapOn: Drawing
-
+- waitForAnimationToEnd
+- tapOn:
+    id: menuIV
+- tapOn:
+    id: itemTV
+    index: 4
+   
 #Drawing Rectangle
 #Top line
 - waitForAnimationToEnd

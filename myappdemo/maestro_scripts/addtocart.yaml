@@ -4,55 +4,94 @@ appId: com.saucelabs.mydemoapp.android
     clearState: true
 
  #Verify that user can add products to cart from catalog
-- extendedWaitUntil:
-    visible: Product image
-    timeout: 100
-- tapOn: 
-   text: product image
-   index: 0
-- tapOn: Increase item quantity
-
-- tapOn: Add to cart
-- tapOn: Displays number of items in your cart
-- tapOn: Proceed To Checkout
-- tapOn: bod@example.com
+- waitForAnimationToEnd:
+    timeout: 5000
+#add product to cart    
 - tapOn:
-    text: Login
-    index: 1
+    id: productIV
+- tapOn:
+    id: plusIV
+- tapOn:
+    id: cartBt
+- tapOn:
+    id: cartIV
+- waitForAnimationToEnd
+- tapOn:
+    id: cartBt
+
+ #login to proceed to checkout
+- tapOn:
+    id: username1TV
+
+- tapOn:
+    id: buttonLL
+- waitForAnimationToEnd
+
 
 #Verify user can proceed for checkout after adding product to cart
-- tapOn: Rebecca Winter
+#Enter details for checkout
+- tapOn:
+    id: fullNameRL
 - inputText: Test
-- tapOn: Mandorley 112
+- tapOn:
+    id: address1RL
 - inputText: Test1
-- tapOn: Entrance 1
+- tapOn:
+    id: address2RL
+
 - inputText: Test1
 - hideKeyboard
-- tapOn: Truro
+- waitForAnimationToEnd
+- tapOn:
+    id: cityRL
 - inputText: test
-- tapOn: Cornwall
+- tapOn:
+    id: stateRL
+
 - inputText: test
 - hideKeyboard
-- tapOn: "89750"
+- tapOn:
+    id: zipRL
 - inputText: "1234"
-- tapOn: United Kingdom
+- tapOn:
+    id: countryRL
+
 - inputText: Australia
 - hideKeyboard
-- tapOn: To Payment
+- tapOn:
+    id: paymentBtn
+- assertVisible:
+    id: paymentBtn
+
+
 
 #Final checkout process- tapOn: Rebecca Winter
-- tapOn: Rebecca Winter
+
+- tapOn:
+    id: nameRL
+
 - inputText: Test
-- tapOn: 3258 1256 7568 7891
+- tapOn:
+    id: cardNumberET
 - inputText: "123456789"
-- tapOn: 03/25
+- hideKeyboard
+- tapOn:
+    id: expirationDateRL
+
 - inputText: 04/25
-- tapOn: "123"
+- tapOn:
+    id: securityCodeRL
+
 - inputText: "123"
 - hideKeyboard
-- tapOn: Review Order
-- tapOn: Place Order
-- assertVisible: Checkout Complete
+- tapOn:
+    id: paymentBtn
+- waitForAnimationToEnd
+- tapOn:
+    id: paymentBtn
+- assertNotVisible:
+    id: completeTV
+
 
 
 
