@@ -1,4 +1,4 @@
-name: Run Maestro Tests (Emulator)
+name: Run Maestro Tests (Emulator Stable)
 
 on:
   push:
@@ -12,18 +12,22 @@ jobs:
     timeout-minutes: 20
 
     steps:
+      # Checkout Code
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      #  Setup Java
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
+      #  Setup Android SDK
       - name: Install Android SDK
         uses: android-actions/setup-android@v3
 
+      #  Install Required SDK Packages (LIGHTWEIGHT)
       - name: Install SDK Packages
         run: |
           yes | sdkmanager --licenses
@@ -31,21 +35,31 @@ jobs:
                      "platforms;android-30" \
                      "system-images;android-30;google_apis;x86"
 
+      #  Create Emulator (AVD)
       - name: Create AVD
         run: |
           echo "no" | avdmanager create avd -n test_avd \
           -k "system-images;android-30;google_apis;x86" \
           --device "pixel"
 
-      - name: Start Emulator (Lightweight)
+      #  Start Emulator (OPTIMIZED)
+      - name: Start Emulator
         run: |
           nohup emulator -avd test_avd \
-          -no-window -no-audio -no-boot-anim -accel off &
-          
-      - name: Wait for Emulator (SAFE)
+          -no-window \
+          -no-audio \
+          -no-boot-anim \
+          -gpu swiftshader_indirect \
+          -no-snapshot \
+          -no-metrics \
+          -wipe-data \
+          -accel off &
+
+      # Wait for Emulator (SAFE + TIMEOUT)
+      - name: Wait for Emulator to Boot
         run: |
           adb wait-for-device
-          timeout=180
+          timeout=300
           elapsed=0
 
           until adb shell getprop sys.boot_completed | grep -m 1 '1'; do
@@ -58,18 +72,22 @@ jobs:
             elapsed=$((elapsed+5))
           done
 
+          echo " Emulator booted!"
           adb shell input keyevent 82
 
+      #  Install APK
       - name: Install APK
         run: |
           adb install app/mydemoapp.apk
 
+      #  Install Maestro CLI
       - name: Install Maestro
         run: |
           curl -Ls "https://get.maestro.mobile.dev" | bash
           echo "$HOME/.maestro/bin" >> $GITHUB_PATH
           maestro --version
 
+      #  Run Maestro Tests
       - name: Run Maestro Tests
         run: |
           maestro test maestro-scripts/
