@@ -21,7 +21,7 @@ This allows anyone to:
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 .
@@ -76,11 +76,11 @@ adb install app/mydemoapp.apk
 maestro test myappdemo/maestro_scripts
 ```
 
-✔ This runs all test scripts on your real device
+This runs all test scripts on your real device
 
 ---
 
-## 🤖 CI/CD Testing (GitHub Actions)
+##  CI/CD Testing (GitHub Actions)
 
 This project includes a workflow file:
 
