@@ -3,7 +3,12 @@ appId:  com.saucelabs.mydemoapp.android
 - launchApp:
     clearState: true
 
- #Verify login with valid username bod@example.com and password 10203040   
+ #Verify login with valid username bod@example.com and password 10203040 
+- extendedWaitUntil:
+    visible: View menu
+    timeout: 10000
+
+ 
 - tapOn: View menu
 - tapOn: Log In
 - tapOn:
@@ -90,6 +95,11 @@ appId:  com.saucelabs.mydemoapp.android
 - tapOn:
     text: Login
     index: 1
+ 
+- tapOn: Cancel
+- assertVisible: App logo and name
+
+   
 
 
 

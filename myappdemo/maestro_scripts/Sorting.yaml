@@ -3,19 +3,18 @@ appId: com.saucelabs.mydemoapp.android
 - launchApp:
     clearState: true
 
- #Verify products are soretd in descending alphbetical order   
-- tapOn: Shows current sorting order and displays available sorting options
+  #Verify products are soretd in descending alphbetical order
+- waitForAnimationToEnd
+
+- tapOn:
+    id: sortIV
+
 - tapOn: Descending order by name
-- scrollUntilVisible:
-    element:
-      text: © 2023 Sauce Labs All Rights Reserved. Terms of Service | Privacy Policy
+- assertVisible: Test.allTheThings() T-Shirt (yellow)
 
 #Verify are sorted in ascending order of price
-- tapOn: Shows current sorting order and displays available sorting options
-- tapOn: Ascending order by price
-- scrollUntilVisible:
-    element:
-      text: © 2023 Sauce Labs All Rights Reserved. Terms of Service | Privacy Policy      
-
-
-
+- waitForAnimationToEnd
+- tapOn:
+    id: sortIV
+- tapOn: Displays ascending sorting order by price
+- assertVisible: $ 7.99

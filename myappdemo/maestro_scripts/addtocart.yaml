@@ -4,7 +4,9 @@ appId: com.saucelabs.mydemoapp.android
     clearState: true
 
  #Verify that user can add products to cart from catalog
-
+- extendedWaitUntil:
+    visible: Product image
+    timeout: 100
 - tapOn: 
    text: product image
    index: 0

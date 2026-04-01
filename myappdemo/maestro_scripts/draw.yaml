@@ -2,55 +2,47 @@ appId: com.saucelabs.mydemoapp.android
 ---
 - launchApp:
     clearState: true
+- extendedWaitUntil:
+    visible: View menu
+    timeout: 10000    
 - tapOn: View menu
 - tapOn: Drawing
 
 #Drawing Rectangle
 #Top line
+- waitForAnimationToEnd
+
 - swipe:
     start: 100,500
     end: 400,500
     duration: 500
 
 # Right line
+- waitForAnimationToEnd
+
 - swipe:
     start: 400,500
     end: 400,800
     duration: 500
 
 # Bottom line
+- waitForAnimationToEnd
 - swipe:
     start: 400,800
     end: 100,800
     duration: 500
 
 # Left line
+- waitForAnimationToEnd
 - swipe:
     start: 100,800
     end: 100,500
     duration: 500
-- tapOn: Clear
+
  
 
 
-   #Drawing circle
-   
-# - swipe: 
-#     start: 250,500,
-#     end: 300,450,
-#     duration: 150 
-# - swipe: 
-#     start: 300,450, 
-#     end: 350,500, 
-#     duration: 150 
-# - swipe: 
-#     start: 350,500,
-#     end: 300,550,
-#     duration: 150 
-# - swipe:
-#     start: 300,550,
-#     end: 250,500, 
-#     duration: 150 
+
 
 
 
